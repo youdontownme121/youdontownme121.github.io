@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Randomized Thumbnails with Links</title>
+<title>Randomized Thumbnails with Links</title>
     <style>
-        /* Styling for the thumbnails container and images */
+
         #thumbnails {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .thumbnail {
-            margin: 5px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the thumbnails horizontally */
+    align-items: center;     /* Centers the thumbnails vertically (if needed) */
+    gap: 10px;               /* Optional: adds space between the thumbnails */
+    padding: 10px;           /* Optional: adds padding around the entire container */
+}
+.thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px; /* Optional: Adds rounded corners to the thumbnails */
+}
+    .font {
+}
     </style>
 </head>
-<body>
+<body style="background-color:cadetblue;">
+	
 
-    <h1>Random Thumbnails with Links</h1>
-    <div id="thumbnails"></div>
+<h1><center> 
+  <strong class="font">HWB Connect</strong>
+</center></h1>
+<div id="thumbnails"></div>
+		
 
     <script>
-        // Array of image URLs (replace these URLs with your actual image paths)
+
         const imageUrls = [
             "Game1.png",
             "Game2.png",
@@ -38,7 +48,7 @@
             "Game10.png"
         ];
 
-        // Array of link URLs corresponding to each image (replace with your target URLs)
+
         const linkUrls = [
             "https://example.com/page1",
             "https://example.com/page2",
@@ -52,22 +62,22 @@
             "https://example.com/page10"
         ];
 
-        // Function to get a unique random subset of images and links
+
         function getUniqueRandomThumbnails(count) {
-            // Combine images and links into an array of objects
+
             const combined = imageUrls.map((url, index) => ({
                 imageUrl: url,
                 linkUrl: linkUrls[index]
             }));
 
-            // Array to hold the selected unique thumbnails
+
             const selectedThumbnails = [];
 
             while (selectedThumbnails.length < count) {
-                // Pick a random index from the combined array
+
                 const randomIndex = Math.floor(Math.random() * combined.length);
 
-                // Check if the thumbnail is already selected
+
                 if (!selectedThumbnails.includes(combined[randomIndex])) {
                     selectedThumbnails.push(combined[randomIndex]);
                 }
@@ -76,31 +86,31 @@
             return selectedThumbnails;
         }
 
-        // Function to render thumbnails with links
+
         function renderThumbnails() {
             const thumbnailsContainer = document.getElementById("thumbnails");
             const randomThumbnails = getUniqueRandomThumbnails(5);
 
-            // Clear existing thumbnails
+
             thumbnailsContainer.innerHTML = '';
 
-            // Add new random thumbnails
+ 
             randomThumbnails.forEach(item => {
                 const link = document.createElement("a");
-                link.href = item.linkUrl; // Set the link URL
-                link.target = "_blank";   // Opens link in a new tab
+                link.href = item.linkUrl; 
+                link.target = "_blank";   
 
                 const img = document.createElement("img");
-                img.src = item.imageUrl;  // Set the image source
+                img.src = item.imageUrl;  
                 img.classList.add("thumbnail");
 
-                // Append image to link, then link to container
+
                 link.appendChild(img);
                 thumbnailsContainer.appendChild(link);
             });
         }
 
-        // Load thumbnails when the page is loaded
+
         window.onload = renderThumbnails;
     </script>
 </body>
