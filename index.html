@@ -29,48 +29,57 @@
             "Game1.png",
             "Game2.png",
             "Game3.png",
-            "thumbnail4.jpg",
-            "thumbnail5.jpg",
-            "thumbnail6.jpg",
-            "thumbnail7.jpg",
-            "thumbnail8.jpg",
-            "thumbnail9.jpg",
-            "thumbnail10.jpg"
+            "Game4.png",
+            "Game5.png",
+            "Game6.png",
+            "Game7.png",
+            "Game8.png",
+            "Game9.png",
+            "Game10.png"
         ];
 
         // Array of link URLs corresponding to each image (replace with your target URLs)
         const linkUrls = [
-            "https://example.com/page1",//1
-            "https://example.com/page2",//2
-            "https://example.com/page3",//3
-            "https://example.com/page4",//4
-            "https://example.com/page5",//5
-            "https://example.com/page6",//6
-            "https://example.com/page7",//7
-            "https://example.com/page8",//8
-            "https://example.com/page9",//9
-            "https://example.com/page10"//10
+            "https://example.com/page1",
+            "https://example.com/page2",
+            "https://example.com/page3",
+            "https://example.com/page4",
+            "https://example.com/page5",
+            "https://example.com/page6",
+            "https://example.com/page7",
+            "https://example.com/page8",
+            "https://example.com/page9",
+            "https://example.com/page10"
         ];
 
-        // Function to get a random subset of images and links
-        function getRandomThumbnails(count) {
+        // Function to get a unique random subset of images and links
+        function getUniqueRandomThumbnails(count) {
             // Combine images and links into an array of objects
             const combined = imageUrls.map((url, index) => ({
                 imageUrl: url,
                 linkUrl: linkUrls[index]
             }));
 
-            // Shuffle the combined array
-            const shuffled = combined.sort(() => 0.5 - Math.random());
+            // Array to hold the selected unique thumbnails
+            const selectedThumbnails = [];
 
-            // Return the first `count` elements
-            return shuffled.slice(0, count);
+            while (selectedThumbnails.length < count) {
+                // Pick a random index from the combined array
+                const randomIndex = Math.floor(Math.random() * combined.length);
+
+                // Check if the thumbnail is already selected
+                if (!selectedThumbnails.includes(combined[randomIndex])) {
+                    selectedThumbnails.push(combined[randomIndex]);
+                }
+            }
+
+            return selectedThumbnails;
         }
 
         // Function to render thumbnails with links
         function renderThumbnails() {
             const thumbnailsContainer = document.getElementById("thumbnails");
-            const randomThumbnails = getRandomThumbnails(5);
+            const randomThumbnails = getUniqueRandomThumbnails(5);
 
             // Clear existing thumbnails
             thumbnailsContainer.innerHTML = '';
