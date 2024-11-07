@@ -3,38 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Randomized Thumbnails with Links</title>
+    <title>Thumbnails List</title>
     <style>
-
         #thumbnails {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centers the thumbnails horizontally */
-    align-items: center;     /* Centers the thumbnails vertically (if needed) */
-    gap: 10px;               /* Optional: adds space between the thumbnails */
-    padding: 10px;           /* Optional: adds padding around the entire container */
-}
-.thumbnail {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px; /* Optional: Adds rounded corners to the thumbnails */
-}
-    .font {
-}
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers the thumbnails horizontally */
+            gap: 10px;               /* Adds space between thumbnails */
+            padding: 20px;           /* Adds padding around the container */
+        }
+
+        .thumbnail {
+            width: 100px;            /* Thumbnail width */
+            height: 100px;           /* Thumbnail height */
+            object-fit: cover;       /* Ensures images are properly sized */
+            border-radius: 5px;      /* Optional: Adds rounded corners */
+            flex-basis: calc(20% - 10px);  /* Each thumbnail takes up 20% of the row minus the gap */
+        }
     </style>
 </head>
 <body style="background-color:cadetblue;">
-	
-
-<h1><center> 
-  <strong class="font">HWB Connect</strong>
-</center></h1>
-<div id="thumbnails"></div>
-		
+    <h1>Game List</h1>
+    <div id="thumbnails"></div>
 
     <script>
-
         const imageUrls = [
             "Game1.png",
             "Game2.png",
@@ -47,7 +39,6 @@
             "Game9.png",
             "Game10.png"
         ];
-
 
         const linkUrls = [
             "https://example.com/page1",
@@ -62,54 +53,26 @@
             "https://example.com/page10"
         ];
 
-
-        function getUniqueRandomThumbnails(count) {
-
-            const combined = imageUrls.map((url, index) => ({
-                imageUrl: url,
-                linkUrl: linkUrls[index]
-            }));
-
-
-            const selectedThumbnails = [];
-
-            while (selectedThumbnails.length < count) {
-
-                const randomIndex = Math.floor(Math.random() * combined.length);
-
-
-                if (!selectedThumbnails.includes(combined[randomIndex])) {
-                    selectedThumbnails.push(combined[randomIndex]);
-                }
-            }
-
-            return selectedThumbnails;
-        }
-
-
         function renderThumbnails() {
             const thumbnailsContainer = document.getElementById("thumbnails");
-            const randomThumbnails = getUniqueRandomThumbnails(5);
 
-
+            // Clear the container before rendering the thumbnails
             thumbnailsContainer.innerHTML = '';
 
- 
-            randomThumbnails.forEach(item => {
+            // Loop through all images and display them in order
+            imageUrls.forEach((imageUrl, index) => {
                 const link = document.createElement("a");
-                link.href = item.linkUrl; 
-                link.target = "_blank";   
+                link.href = linkUrls[index];  // Use the corresponding link
+                link.target = "_blank";  // Open the link in a new tab
 
                 const img = document.createElement("img");
-                img.src = item.imageUrl;  
-                img.classList.add("thumbnail");
-
+                img.src = imageUrl;  // Set the source to the image URL
+                img.classList.add("thumbnail");  // Add the thumbnail class for styling
 
                 link.appendChild(img);
                 thumbnailsContainer.appendChild(link);
             });
         }
-
 
         window.onload = renderThumbnails;
     </script>
