@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HWB Connect</title>
+    <style>
+        #thumbnails {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            max-width: 500px; /* Limits the total width to create rows of 5-6 thumbnails */
+            margin: auto;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            flex: 1 1 calc(20% - 10px); /* Makes each thumbnail take up about 20% of the row */
+        }
+    </style>
+</head>
+<body style="background-color:cadetblue;">
+    <h1><center>Game List</center></h1>
+    <div id="thumbnails"></div>
+
+    <script>
+        const imageUrls = [
+            "/images/2048.png",
+            "/images/slope.jpg",
+            "/images/bob2.png",
+            "/images/drive-mad.jpg",
+            "/images/moto-x3m.jpg",
+            "/images/motox3m2.jpg",
+            "/images/retro-bowl.jpg",
+            "/images/vex5.jpg",
+            "/images/vex6.jpeg",
+            "/images/vex7.jpeg",
+            "/images/drift-boss.png",
+        ];
+
+        const linkUrls = [
+            "https://youdontownme121.github.io/games/2048/index.html",
+            "https://youdontownme121.github.io/games/slope/index.html",
+            "https://youdontownme121.github.io/games/bob-the-robber-2/index.html",
+            "https://youdontownme121.github.io/games/drive-mad/index.html",
+            "https://youdontownme121.github.io/games/moto-x3m/index.html",
+            "https://youdontownme121.github.io/games/motox3m2/index.html",
+            "https://youdontownme121.github.io/games/retro-bowl/index.html",
+            "https://youdontownme121.github.io/games/vex5/index.html",
+            "https://youdontownme121.github.io/games/vex6/index.html",
+            "https://youdontownme121.github.io/games/vex7/index.html",
+            "https://youdontownme121.github.io/games/driftboss/index.html"
+        ];
+
+        function renderThumbnails() {
+            const thumbnailsContainer = document.getElementById("thumbnails");
+
+            // Clear the container before rendering the thumbnails
+            thumbnailsContainer.innerHTML = '';
+
+            // Loop through all images and display them in order
+            imageUrls.forEach((imageUrl, index) => {
+                const link = document.createElement("a");
+                link.href = linkUrls[index];  // Use the corresponding link
+                link.target = "_blank";  // Open the link in a new tab
+
+                const img = document.createElement("img");
+                img.src = imageUrl;  // Set the source to the image URL
+                img.classList.add("thumbnail");  // Add the thumbnail class for styling
+
+                link.appendChild(img);
+                thumbnailsContainer.appendChild(link);
+            });
+        }
+
+        window.onload = renderThumbnails;
+    </script>
+</body>
+</html>
